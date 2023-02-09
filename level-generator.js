@@ -1,17 +1,31 @@
-const level = 4;
-const blocksNo = 16;
+const level = 0;
 
-const levelImages = {
-  1: "plygon",
-  2: "circle",
-  3: "cube",
-  4: "moon",
-  5: "triangle"
+const data = {
+  0: { block: 4, image: "star" },
+  1: { block: 8, image: "polygon" },
+  2: { block: 9, image: "circle" },
+  3: { block: 16, image: "cube" },
+  4: { block: 16, image: "moon" },
+  5: { block: 20, image: "triangle" }  
 }
 
-function getRandom() {
-  const randomNumber = Math.random() * (blocksNo - 1) + 1;
+const blocksNo = data[level].block;
+
+function getRandom(min = 1, max = blocksNo) {
+  const randomNumber = Math.random() * (max - min) + min;
   return Math.round(randomNumber).toString();
+}
+
+const firstPiece = []
+
+for (let i = 1; i <= blocksNo; i++) {
+  const rand = getRandom();
+  
+  if (firstPiece.includes(rand)) {
+    i--;
+  } else {
+    firstPiece.push(rand);
+  }
 }
 
 // GENERATING GRID
@@ -19,11 +33,20 @@ function getRandom() {
 const grid    = [];
 const firsts  = [];
 
-for (let i = 0; i < blocksNo; i++) {
+let currColumn = 1;
+
+for (let i = 1; i <= blocksNo; i++) {
   const column = [];
 
-  for (let ii = 0; ii < blocksNo; ii++) {
-    const number = getRandom();
+  for (let ii = 1; ii <= blocksNo; ii++) {
+    let number = getRandom(2, blocksNo);
+    
+
+    if (currColumn == i && ii == firstPiece[i - 1]) {
+      currColumn++;
+
+      number = 1;
+    }
 
     if (ii == 0) {
       if (firsts.includes(number)) {
@@ -32,7 +55,9 @@ for (let i = 0; i < blocksNo; i++) {
         firsts.push(number);
         column.push(number);
       }
+
     } else if (column.includes(number)) {
+
       ii--;
     } else {
       column.push(number);
@@ -46,11 +71,11 @@ for (let i = 0; i < blocksNo; i++) {
 
 let compactGrid = "";
 
-for (let i = 0; i < grid.length; i++) {
+for (let i = 1; i <= grid.length; i++) {
 
-  for (let ii = 0; ii < grid.length; ii++) {
-    const column = grid[ii];
-    const number = column[i];
+  for (let ii = 1; ii <= grid.length; ii++) {
+    const column = grid[ii - 1];
+    const number = column[i - 1];
 
     compactGrid += number + " ";
   }
@@ -60,13 +85,13 @@ for (let i = 0; i < grid.length; i++) {
 
 let result = `/*
   Automatically generated file
-  Generator repository: 
+  Generator: https://github.com/refusado/scrollzz-generator
 */\n
 `;
 let currentBlock = 1;
 let currentPiece = 1;
 
-const image = levelImages[level];
+const image = data[level].image;
 
 listedGrid = compactGrid.split(' ');
 listedGrid.map((number, index) => {

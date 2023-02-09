@@ -39,6 +39,7 @@ A partir disso, uma nova lógica é executada para criar o conteúdo do arquivo 
 #b29 .tile:nth-child(3) {
   background-image: var(--circle-1);
 }
+```
 
 <!-- * Esta sequência de código adiciona a primeira peça do puzzle (imagem número 1) à oitava posição do primeiro bloco (`#b21 .tile:nth-child(8)`), à quarta posição do segundo bloco (``) -->
 <!-- Cada bloco de um nível tem o seu ID único, nomeados pelo número do nível somado a sua posíção: `#b23` representa o terceiro bloco do nível dois. -->

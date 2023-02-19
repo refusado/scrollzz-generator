@@ -1,0 +1,8 @@
+- recebe a quantidade de blocos
+- recebe a quantidade de peças em cada bloco
+- gera um ordem de peças aleatórias para cada bloco
+  - não pode haver peças repetidas na primeira posição
+  - a peça na primeira posição não pode ser a peça correta do bloco
+- gere uma lista com as posições de cada peça em cada bloco
+  - exemplo: a peça 1 está na posição x do bloco 1, posição y do bloco 2...
+- gere a estrutura do arquivo css

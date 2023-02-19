@@ -1,5 +1,5 @@
-const blocksNo = 9;
-const pieces = blocksNo;
+const blocksNo = 5;
+const piecesNo = blocksNo;
 
 function randomNumber(min = 1, max = blocksNo, except = []) {
   let number, random;
@@ -41,4 +41,16 @@ for (let i = 0; i < blocksNo; i++) {
   const first = firstPieces[i];
 
   blocks.push(randomSequence(1, blocksNo, blocksNo - 1, [first]));
+}
+
+const piecesPositions = [];
+for (let i = 1; i <= piecesNo; i++) {
+  const currPiece = [];
+
+  for (let j = 0; j < blocks.length; j++) {
+    const position = blocks[j].indexOf(i) + 1;
+    currPiece.push(position);
+  }
+
+  piecesPositions.push(currPiece);
 }
